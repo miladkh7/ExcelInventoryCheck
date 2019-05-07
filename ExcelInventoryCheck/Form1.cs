@@ -283,13 +283,21 @@ namespace ExcelInventoryCheck
             
         }
 
-
+        public string CorectingValue(string orginalValue)
+        {
+            
+            string finalValue = (orginalValue.StartsWith("0")) ? orginalValue.Substring(1) : orginalValue;
+            return finalValue;
+        }
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
+            //MessageBox.Show(rowIndex.ToString());
             //use this for show the value
             //MessageBox.Show(dataGridView1.Rows[rowIndex].Cells[0].Value.ToString());
-            InterRowInDataGridView(dataGridView1, dataGridView1[0, rowIndex].Value.ToString(), rowIndex);
+            string cellValue = dataGridView1[0, rowIndex].Value.ToString();
+            string correctValueOfCell = CorectingValue(cellValue);
+            InterRowInDataGridView(dataGridView1, correctValueOfCell, rowIndex);
         }
 
         private void btnReciveDataBase_Click(object sender, EventArgs e)
@@ -300,7 +308,7 @@ namespace ExcelInventoryCheck
             tslCurrentStatus.Text = "در حال بارگذاری دیتابیس . لطفا صبور باشید";
             List<Prouduct> dataBase = refrenceDataBase.ReadExcelDataBase();
             MyProducts = CraateDictionaryFromDataBaseList(dataBase);
-            tslCurrentStatus.Text = "بارگذاری تکمیل شد ،حالا می توانید نصبت با استعلام گیری اقدام نمایید.";
+            tslCurrentStatus.Text = "بارگذاری تکمیل شد ،حالا می توانید نسبت با استعلام گیری اقدام نمایید.";
             dataGridView1.Focus();
 
             refrenceDataBase.Close();
