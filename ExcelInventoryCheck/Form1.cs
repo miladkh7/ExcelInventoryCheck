@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Text.RegularExpressions;
 
 namespace ExcelInventoryCheck
 {
@@ -297,8 +297,27 @@ namespace ExcelInventoryCheck
             //MessageBox.Show(dataGridView1.Rows[rowIndex].Cells[0].Value.ToString());
             string cellValue = dataGridView1[0, rowIndex].Value.ToString();
             
-            string correctValueOfCell = CorectingValue(cellValue);
-            InterRowInDataGridView(dataGridView1, correctValueOfCell, rowIndex);
+            Boolean cellIsDigit = Regex.IsMatch(cellValue, "[0-9]");
+            if (cellIsDigit)
+            {
+               
+                string correctValueOfCell = CorectingValue(cellValue);
+                InterRowInDataGridView(dataGridView1, correctValueOfCell, rowIndex);
+            }
+            else
+            {
+                try
+                {
+                    dataGridView1.Rows.RemoveAt(rowIndex);
+                }
+                catch (Exception)
+                {
+
+                    
+                }
+                MessageBox.Show("hoy kerm ezfe nariz");
+            }
+
         }
 
         private void btnReciveDataBase_Click(object sender, EventArgs e)
@@ -375,7 +394,29 @@ namespace ExcelInventoryCheck
 
         }
 
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (dataGridView1.CurrentCell.ColumnIndex == 0)
+            {
+                e.Control.KeyPress += new KeyPressEventHandler(CheckKey);
+            }
+        }
+        private void CheckKey(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
 
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count > 0)
+            {
+                dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+            }
+        }
     }
  
     

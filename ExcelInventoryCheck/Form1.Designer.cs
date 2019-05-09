@@ -51,6 +51,7 @@
             this.btnClearList = new System.Windows.Forms.Button();
             this.btnCollectData = new System.Windows.Forms.Button();
             this.btnSaveResult = new System.Windows.Forms.Button();
+            this.btnDeleteItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -100,6 +101,7 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
+            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
             // clmProductCode
             // 
@@ -283,11 +285,23 @@
             this.btnSaveResult.UseVisualStyleBackColor = true;
             this.btnSaveResult.Click += new System.EventHandler(this.btnSaveResult_Click);
             // 
+            // btnDeleteItem
+            // 
+            this.btnDeleteItem.Font = new System.Drawing.Font("B Nazanin", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnDeleteItem.Location = new System.Drawing.Point(224, 6);
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.Size = new System.Drawing.Size(99, 28);
+            this.btnDeleteItem.TabIndex = 7;
+            this.btnDeleteItem.Text = "حذف ایتم";
+            this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 561);
+            this.Controls.Add(this.btnDeleteItem);
             this.Controls.Add(this.btnSaveResult);
             this.Controls.Add(this.btnCollectData);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -329,6 +343,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDefrence;
         private System.Windows.Forms.Button btnCollectData;
         private System.Windows.Forms.Button btnSaveResult;
+        private System.Windows.Forms.Button btnDeleteItem;
     }
 }
 
