@@ -11,7 +11,7 @@ namespace ExcelInventoryCheck
 {
     class MyExcel
     {
-
+        public Boolean isExcelFilePathValid = false;
         string path = string.Empty;
         string savingPath = string.Empty;
         _Application excel = new _Excel.Application();
@@ -62,6 +62,7 @@ namespace ExcelInventoryCheck
         /// </summary>
         public void OpenExcelFileWithDialog()
         {
+            isExcelFilePathValid = false;
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Title = "select Excel file 2003";
             openDialog.Filter = "excel 97to2003(*.xls)|*.xls|excel2007 and above(*.xlsx)|*.xlsx";
@@ -84,6 +85,7 @@ namespace ExcelInventoryCheck
                     if (openDialog.FileName != null) this.path = openDialog.FileName;
 
                     OpenExcelFile(path, 1);
+                    isExcelFilePathValid = true;
 
                 }
 

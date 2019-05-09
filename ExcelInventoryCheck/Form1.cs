@@ -296,6 +296,7 @@ namespace ExcelInventoryCheck
             //use this for show the value
             //MessageBox.Show(dataGridView1.Rows[rowIndex].Cells[0].Value.ToString());
             string cellValue = dataGridView1[0, rowIndex].Value.ToString();
+            
             string correctValueOfCell = CorectingValue(cellValue);
             InterRowInDataGridView(dataGridView1, correctValueOfCell, rowIndex);
         }
@@ -305,13 +306,20 @@ namespace ExcelInventoryCheck
             tslCurrentStatus.Text="فایل مبدا(دیتا بیس رو انتخاب نمایید.";
             refrenceDataBase = new MyExcel();
             refrenceDataBase.OpenExcelFileWithDialog();
-            tslCurrentStatus.Text = "در حال بارگذاری دیتابیس . لطفا صبور باشید";
-            List<Prouduct> dataBase = refrenceDataBase.ReadExcelDataBase();
-            MyProducts = CraateDictionaryFromDataBaseList(dataBase);
-            tslCurrentStatus.Text = "بارگذاری تکمیل شد ،حالا می توانید نسبت با استعلام گیری اقدام نمایید.";
-            dataGridView1.Focus();
+            if (refrenceDataBase.isExcelFilePathValid)
+            {
+                tslCurrentStatus.Text = "در حال بارگذاری دیتابیس . لطفا صبور باشید";
+                List<Prouduct> dataBase = refrenceDataBase.ReadExcelDataBase();
+                MyProducts = CraateDictionaryFromDataBaseList(dataBase);
+                tslCurrentStatus.Text = "بارگذاری تکمیل شد ،حالا می توانید نسبت با استعلام گیری اقدام نمایید.";
+                dataGridView1.Focus();
 
-            refrenceDataBase.Close();
+                refrenceDataBase.Close();
+            }
+            else
+            {
+                tslCurrentStatus.Text = "انتخاب فایل دیتا بیس صحیح نمی باشد.";
+            }
 
         }
 
