@@ -34,6 +34,9 @@ namespace ExcelInventoryCheck
            //declare defirence beetween init diffrcene and callculated number
            public int diffrenceNumber;
 
+            //delcare current countin number
+            public int currentNumber;
+
             /// <summary>
             /// 
             /// </summary>
@@ -263,24 +266,49 @@ namespace ExcelInventoryCheck
         /// <param name="selectedDataGridView"></param>
         /// <param name="ProuductCode">shamele code mahsol va sayer moshakhaste filed ha</param>
         /// <param name="row">shomare indexi ke bayad vard shavad</param>       
-        private void InterRowInDataGridView(DataGridView selectedDataGridView,string  ProuductCode,int row)
+        public void InterRowInDataGridView(DataGridView selectedDataGridView,string  ProuductCode,int row)
         {
+
             //MessageBox.Show(MyProducts[ProuductCode].code);
             try
             {
+               
+                
                 selectedDataGridView[0, row].Value = MyProducts[ProuductCode].code;
                 selectedDataGridView[1, row].Value = MyProducts[ProuductCode].name;
                 selectedDataGridView[2, row].Value = MyProducts[ProuductCode].initialNumber;
-                selectedDataGridView[3, row].Value = GetCurrntHijriDate();
+                selectedDataGridView[3, row].Value = prouductCodeCounting(selectedDataGridView, ProuductCode) ;
+                selectedDataGridView[4, row].Value = GetCurrntHijriDate();
+                
             }
             catch
             {
                 selectedDataGridView[0, row].Value = ProuductCode;
                 selectedDataGridView[1, row].Value ="Undefind Code";
                 selectedDataGridView[2, row].Value = "0";
-                selectedDataGridView[3, row].Value = GetCurrntHijriDate();
+                selectedDataGridView[3, row].Value = prouductCodeCounting(selectedDataGridView, ProuductCode);
+                selectedDataGridView[4, row].Value = GetCurrntHijriDate();
             }
             
+        }
+        public int prouductCodeCounting(DataGridView mydataGrid,string productCode)
+        {
+            int xCount = 0;
+            try
+            {
+                foreach (DataGridViewRow item in mydataGrid.Rows)
+                {
+                    if (item.Cells[0].Value.Equals(productCode)) xCount++;
+                    //int xCount=
+                }
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+            return xCount;
         }
 
         public string CorectingValue(string orginalValue)
@@ -291,6 +319,7 @@ namespace ExcelInventoryCheck
         }
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+
             int rowIndex = e.RowIndex;
             //MessageBox.Show(rowIndex.ToString());
             //use this for show the value
@@ -303,6 +332,8 @@ namespace ExcelInventoryCheck
                
                 string correctValueOfCell = CorectingValue(cellValue);
                 InterRowInDataGridView(dataGridView1, correctValueOfCell, rowIndex);
+
+               
             }
             else
             {
@@ -341,7 +372,37 @@ namespace ExcelInventoryCheck
             }
 
         }
+        public void DecreseCount(string searchValue, DataGridView myDataGrid,int selectedIndex)
+        {
+            //String searchValue = "somestring";
+            int rowIndex = -1;
+            try
+            {
+                foreach (DataGridViewRow row in myDataGrid.Rows)
+                {
+                    int currentIndex = row.Index;
+                    if (currentIndex<= selectedIndex)
+                    {
+                       
+                        continue;
+                    }
+                    if (row.Cells[0].Value.ToString().Equals(searchValue))
+                    {
+                        rowIndex = row.Index;
+                        myDataGrid[3, rowIndex].Value = int.Parse(myDataGrid[3, rowIndex].Value.ToString()) - 1;
 
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+               
+            }
+
+            
+        }
 
         private void btnCollectData_Click(object sender, EventArgs e)
         {
@@ -414,7 +475,19 @@ namespace ExcelInventoryCheck
         {
             if (this.dataGridView1.SelectedRows.Count > 0)
             {
-                dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+                int currentCellIndex = this.dataGridView1.SelectedRows[0].Index;
+                string currentCell = dataGridView1[0, currentCellIndex].Value.ToString();
+                DialogResult myResult= MessageBox.Show("آیا مطمین به حذف ردیف مربوطه می باشید؟","حذف ریکورد", MessageBoxButtons.YesNo);
+                if (myResult==DialogResult.Yes)
+                {
+                    DecreseCount(currentCell, dataGridView1, currentCellIndex);
+                    dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+                }
+
+
+
+
+                //Count("remove", currentCell, dataGridView1);
             }
         }
     }

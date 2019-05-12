@@ -34,10 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.clmProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmProductNam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmProductNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmEntranceTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnReciveDataBase = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tslCurrentStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -52,6 +48,11 @@
             this.btnCollectData = new System.Windows.Forms.Button();
             this.btnSaveResult = new System.Windows.Forms.Button();
             this.btnDeleteItem = new System.Windows.Forms.Button();
+            this.clmProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmProductNam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmProductNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmCurrentNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmEntranceTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -77,6 +79,7 @@
             this.clmProductCode,
             this.clmProductNam,
             this.clmProductNo,
+            this.clmCurrentNo,
             this.clmEntranceTime});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -102,36 +105,6 @@
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
-            // 
-            // clmProductCode
-            // 
-            this.clmProductCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.clmProductCode.Frozen = true;
-            this.clmProductCode.HeaderText = "بارکد محصول";
-            this.clmProductCode.Name = "clmProductCode";
-            this.clmProductCode.Width = 141;
-            // 
-            // clmProductNam
-            // 
-            this.clmProductNam.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.clmProductNam.HeaderText = "نام محصول";
-            this.clmProductNam.Name = "clmProductNam";
-            this.clmProductNam.ReadOnly = true;
-            this.clmProductNam.Width = 141;
-            // 
-            // clmProductNo
-            // 
-            this.clmProductNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.clmProductNo.HeaderText = "تعداد اولیه";
-            this.clmProductNo.Name = "clmProductNo";
-            this.clmProductNo.Width = 140;
-            // 
-            // clmEntranceTime
-            // 
-            this.clmEntranceTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.clmEntranceTime.HeaderText = "زمان شمارش";
-            this.clmEntranceTime.Name = "clmEntranceTime";
-            this.clmEntranceTime.Width = 140;
             // 
             // btnReciveDataBase
             // 
@@ -296,6 +269,44 @@
             this.btnDeleteItem.UseVisualStyleBackColor = true;
             this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
+            // clmProductCode
+            // 
+            this.clmProductCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.clmProductCode.Frozen = true;
+            this.clmProductCode.HeaderText = "بارکد محصول";
+            this.clmProductCode.Name = "clmProductCode";
+            this.clmProductCode.Width = 120;
+            // 
+            // clmProductNam
+            // 
+            this.clmProductNam.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.clmProductNam.HeaderText = "نام محصول";
+            this.clmProductNam.Name = "clmProductNam";
+            this.clmProductNam.ReadOnly = true;
+            this.clmProductNam.Width = 141;
+            // 
+            // clmProductNo
+            // 
+            this.clmProductNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.clmProductNo.HeaderText = "تعداد اولیه";
+            this.clmProductNo.Name = "clmProductNo";
+            this.clmProductNo.Width = 50;
+            // 
+            // clmCurrentNo
+            // 
+            this.clmCurrentNo.HeaderText = "شمارش شده";
+            this.clmCurrentNo.MinimumWidth = 50;
+            this.clmCurrentNo.Name = "clmCurrentNo";
+            this.clmCurrentNo.ReadOnly = true;
+            this.clmCurrentNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // clmEntranceTime
+            // 
+            this.clmEntranceTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.clmEntranceTime.HeaderText = "زمان شمارش";
+            this.clmEntranceTime.Name = "clmEntranceTime";
+            this.clmEntranceTime.Width = 140;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,10 +343,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button btnClearList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmProductCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmProductNam;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmProductNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmEntranceTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmName;
@@ -344,6 +351,11 @@
         private System.Windows.Forms.Button btnCollectData;
         private System.Windows.Forms.Button btnSaveResult;
         private System.Windows.Forms.Button btnDeleteItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmProductCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmProductNam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmProductNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmCurrentNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmEntranceTime;
     }
 }
 
