@@ -13,10 +13,14 @@ namespace ExcelInventoryCheck
 {
     public partial class frmMain : Form
     {
+
+        
+
         #region class and structre
         /// <summary>
         /// in tarife har yek mahsol ast ke shame nam barcode va tedad kol mibashad
         /// </summary>
+        
         public struct Prouduct
         {
             // declare name of product
@@ -232,6 +236,7 @@ namespace ExcelInventoryCheck
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             tslCurrentStatus.Text = "برای شروع فایلی را انتخاب کنید.";
             //test load first excel file
 
@@ -489,6 +494,19 @@ namespace ExcelInventoryCheck
 
                 //Count("remove", currentCell, dataGridView1);
             }
+        }
+
+
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {   
+
+           
+
+            DialogResult dialog = MessageBox.Show("ایا می خواهید از برنامه خارج شوید", "خروج", MessageBoxButtons.YesNo);
+                if (dialog == DialogResult.No) e.Cancel = true;
+
+            
         }
     }
  
